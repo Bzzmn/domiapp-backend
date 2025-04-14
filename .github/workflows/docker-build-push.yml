@@ -11,7 +11,7 @@ on:
 
 env:
   DOCKER_REGISTRY: docker.io
-  DOCKER_IMAGE_NAME: ${{ github.repository_owner }}/domiapp-backend
+  DOCKER_IMAGE_NAME: bzzmn/domiapp-backend
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 
 jobs:
@@ -72,13 +72,3 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
-      - name: Send notification on success
-        if: success()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "Docker Build and Push"
-          SLACK_MESSAGE: "✅ La imagen Docker ${{ env.DOCKER_IMAGE_NAME }}:${{ steps.set_tag.outputs.tag }} se construyó y publicó con éxito"
-          SLACK_COLOR: good
-        continue-on-error: true
