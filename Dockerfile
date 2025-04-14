@@ -6,13 +6,15 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     build-essential \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar requirements.txt primero para aprovechar la caché
 COPY requirements.txt .
 
-# Instalar dependencias en una ubicación específica
-RUN pip install --no-cache-dir --user -r requirements.txt
+# Instalar dependencias
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Etapa final - imagen más ligera
 FROM python:3.11-slim
@@ -32,14 +34,19 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
 
 WORKDIR /app
 
-# Copiar solo las dependencias Python desde la etapa builder
-COPY --from=builder /root/.local /root/.local
+# Instalar curl para el healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Configurar PATH para las dependencias
-ENV PATH=/root/.local/bin:$PATH \
-    PYTHONPATH=/app \
+# Configurar variables de entorno
+ENV PYTHONPATH=/app \
     PYTHONUNBUFFERED=1 \
     PORT=8000
+
+# Copiar dependencias instaladas desde la etapa builder
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 
 # Copiar el código de la aplicación
 COPY . .
@@ -51,9 +58,6 @@ USER appuser
 
 # Exponer el puerto
 EXPOSE ${PORT}
-
-# Verificar la instalación
-RUN python -c "import fastapi; print(f'FastAPI version: {fastapi.__version__}')"
 
 # Usar ENTRYPOINT con CMD para mejor control
 ENTRYPOINT ["uvicorn"]

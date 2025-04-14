@@ -44,13 +44,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
+      # Crear directorio para la caché
+      - name: Create cache directory
+        run: mkdir -p /tmp/.buildx-cache
 
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
@@ -60,15 +56,30 @@ jobs:
           tags: |
             ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.set_tag.outputs.tag }}
             ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          # Usar caché de Docker directamente en lugar de local
+          cache-from: type=registry,ref=${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
           build-args: |
             BUILD_DATE=${{ github.event.repository.updated_at }}
             VCS_REF=${{ github.sha }}
             VERSION=${{ steps.set_tag.outputs.tag }}
+          # Agregar opción para diagnóstico
+          outputs: type=docker,dest=/tmp/image.tar
+          # No fallar en errores
+          provenance: false
+          sbom: false
 
-      # Workaround para una limitación conocida de GitHub Actions con la caché
-      - name: Move cache
+      # Cargar la imagen para inspección si la construcción falló
+      - name: Load image for inspection
+        if: failure()
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          docker load < /tmp/image.tar || true
+          docker image ls || true
+
+      # Debug info
+      - name: Debug information
+        if: failure()
+        run: |
+          docker version
+          ls -la /tmp/
+          cat /tmp/.buildx-cache/index.json || echo "No cache index found"
+        continue-on-error: true
