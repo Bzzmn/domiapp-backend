@@ -1,0 +1,66 @@
+{
+  "fecha_certificado": "25.07.2023",
+  "numero_solicitud": "08",
+  "direccion": "AV. EINSTEIN",
+  "loteo": "VISTA HERMOSA MANZANA 22 LOTE 66",
+  "rol_sii": "3173-028",
+  "numero_asignado": "264",
+  "instrumentos_planificacion": [
+    "PLAN REGULADOR INTERCOMUNAL O METROPOLITANO P.R.M.S. y sus modificaciones vigentes Fecha Diario Oficial 11-02-2010",
+    "PLAN REGULADOR COMUNAL Res. Nº 104 de fecha 22.11.2004 Fecha Diario Oficial 08-01-2005",
+    "PLAN REGULADOR COMUNAL Res Nº 2591 Exento de fecha 27.06.2012 Fecha Diario Oficial 10-08-2012",
+    "PLAN REGULADOR COMUNAL Dec N°555 Exento de fecha 12.03.2018 Fecha Diario Oficial 16-03-2018"
+  ],
+  "postergacion_permiso": {
+    "plazo_vigencia": "---",
+    "resolucion_nro": "---",
+    "fecha": "---"
+  },
+  "requiere_informe_subsuelo": true,
+  "zona": "EN QUE SE EMPLAZA EL TERRENO U – EH : “MEXICO CENTRO”",
+  "usos_permitidos": [
+    " Residencial: Vivienda, Hospedaje.",
+    " Equipamiento: De toda las clases y escalas establecidas con excepción de los prohibidos. Centros de servicio automotriz, establecimiento de Venta Minorista de",
+    "Combustibles Líquidos.",
+    " Actividades Productivas:",
+    "Taller: Taller, Taller Mecánico, los que deben cumplir con las condiciones detalladas en el Cuadro N°2 A de esta Ordenanza.",
+    "Industria, Actividades Productivas de Carácter Industrial, Servicios de Carácter Industrial, las que deben cumplir con las condiciones detalladas en el Cuadro",
+    "N°2 A de esta Ordenanza.",
+    "Almacenamiento: Bodega, la que debe cumplir con las disposiciones contempladas en el Cuadro N°2 B de la presente Ordenanza.",
+    " Infraestructura: Energética.",
+    " Espacio Público.",
+    " Área verde."
+  ],
+  "usos_prohibidos": " Se prohíben todos los usos que no estén expresamente permitidos.\nE-M1: MÉXICO CENTRO Y PONIENTE, DORSAL, SUR Y AV.",
+  "superficie_minima": null,
+  "densidad_maxima": "DENSIDAD",
+  "densidad_minima": "ALTURA",
+  "altura_maxima": null,
+  "coeficientes": {
+    "constructibilidad": null,
+    "ocupacion_continuo": null,
+    "ocupacion_aislado": "20"
+  },
+  "exigencias_estacionamientos": ", PARA CADA UNO DE LOS USOS PERMITIDOS O ZONAS O SUBZONAS DEL INSTRUMENTO\nDE PLANIFICACION TERRITORIAL, INCLUIDOS LOS ESTACIONAMIENTOS DE VISITAS, CUANDO CORRESPONDA.\nDEBERÁ CUMPLIR CON EL ARTICULO 5.2.4 (TITULO V) DEL P.R.R.\nZONA O INMUEBLE DE",
+  "linea_oficial": {
+    "distancia_lo": null,
+    "antejardin": null
+  },
+  "utilidad_publica": {
+    "afecta": true
+  },
+  "urbanizacion": {
+    "ejecutada": true,
+    "recepcionada": false,
+    "garantizada": false
+  },
+  "documentos_adjuntos": [
+    "PLANO DE CATASTRO PERFILES DE CALLES ANEXO NORMAS URBANISTICAS DEL I.P.T."
+  ],
+  "firmado_por": null,
+  "fecha_firma": null,
+  "metadata": {
+    "tipo_documento": "CIP",
+    "procesado": true
+  }
+}

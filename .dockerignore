@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.github
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+.env
+.uv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Local development files
+*.db
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Generated files
+.DS_Store 
