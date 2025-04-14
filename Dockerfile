@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Configurar variables de entorno
 ENV PYTHONPATH=/app \
     PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PORT=80
 
 # Copiar dependencias instaladas desde la etapa builder
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
@@ -61,8 +61,8 @@ EXPOSE ${PORT}
 
 # Usar ENTRYPOINT con CMD para mejor control
 ENTRYPOINT ["uvicorn"]
-CMD ["app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["app.api:app", "--host", "0.0.0.0", "--port", "80"]
 
 # Verificación de salud
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:8000/ || exit 1 
+    CMD curl -f http://localhost:80/ || exit 1 
