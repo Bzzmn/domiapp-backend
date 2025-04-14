@@ -35,7 +35,7 @@ class Settings(BaseModel):
     
     # CORS configuration
     CORS_ORIGINS: list = ["*"] if ENV != EnvironmentType.PRODUCTION else [
-        "https://your-production-frontend-domain.com", "http://localhost:3001"
+        "https://your-production-frontend-domain.com", "http://localhost:3001", "http://localhost:3000"
     ]
     
     # Logging configuration
